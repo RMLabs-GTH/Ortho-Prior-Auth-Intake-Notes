@@ -2,48 +2,54 @@
 
 ## Disclaimer
 This repository documents an internal design and build progression.
-It is not a deployed product, not connected to any live clinic systems, and not a claim of outcomes.
+It is not a deployed product, not connected to any live clinic systems, and does not represent outcomes or adoption.
 All examples are synthetic and contain no PHI.
 
 ---
 
 ## The problem
-Orthopaedic clinics lose time to prior authorization back-and-forth before anyone can answer a basic question:
-Is the case ready to submit, or is required documentation missing?
+In orthopaedic clinics, delays often occur before prior authorization even begins.
+Staff and surgeons spend time going back and forth to answer a basic question:
 
-Delays here slow imaging and procedures and create avoidable friction for surgeons, staff, and patients.
+**Is this case ready to submit, or is required documentation missing?**
+
+When that question is unclear, imaging and procedures are delayed unnecessarily.
 
 ---
 
 ## The core idea
-Before payer rules, portals, or EHR integration, the first job is **intake + readiness**:
+Before payer rules, portals, or EHR integration, the first job is **intake and readiness**.
+
+The goal is to:
 - accept the documents clinics already use (upload, email, fax)
 - normalize them into a single case view
 - apply a simple completeness checklist
 - clearly route the case to **READY** or **NEEDS INFO**
 
-This “readiness layer” is intentionally narrow. It aims to remove ambiguity early.
+This layer is intentionally narrow. It focuses on early clarity, not automation.
 
 ---
 
 ## What exists today (design scope)
 A foundational intake layer that:
 - ingests documents from common clinic channels (upload, email, fax)
-- normalizes into a canonical case view
-- evaluates a configurable checklist
-- outputs a clinic-readable summary of:
+- normalizes inputs into a canonical case view
+- evaluates a configurable checklist for completeness
+- outputs a clinic-readable summary showing:
   - readiness state (READY / NEEDS INFO)
   - missing vs received items
   - recommended next action
 
+All behavior is demo-only and uses synthetic documents.
+
 ---
 
 ## Example output (synthetic)
-Prior Authorization Intake Result
-- Procedure: CPT 27447
-- Status: READY
-- Missing Items: None
-- Documents Received: Imaging, Operative report
+Prior Authorization Intake Result  
+- Procedure: CPT 27447  
+- Status: READY  
+- Missing Items: None  
+- Documents Received: Imaging, Operative report  
 - Next Action: Ready to submit prior authorization (demo mode)
 
 ---
@@ -51,16 +57,23 @@ Prior Authorization Intake Result
 ## What this is not
 - Not EHR-integrated
 - Not payer-rule complete
-- Not submitting to portals/fax/APIs
+- Not submitting to portals, fax, or APIs
 - Not monitoring payer responses
 - Not a pilot or deployment
-- Not a guarantee of time savings or approval rates
+- Not a claim of time savings or approval improvements
+
+---
+
+## Progress Log
+
+### 2025-03-08 — Foundational Intake & Readiness Layer
+- Defined a clear intake boundary focused on readiness, not automation.
+- Implemented deterministic routing to READY vs NEEDS INFO using a configurable checklist.
+- Added clinic-readable summary output for demo use.
+- Inputs supported: upload, email, fax (synthetic documents only).
+- Explicitly out of scope: EHR integration, payer rules, submission, monitoring.
 
 ---
 
 ## Why share this
-This repo is a short, public snapshot of how I’m approaching the intake/readiness bottleneck in orthopaedics.
-
----
-
-Last updated: 2025-12-31
+This repository is a public snapshot of how I’m approaching the intake/readiness bottleneck in orthopaedics, before touching EHRs, payer rules, or submission workflows.
