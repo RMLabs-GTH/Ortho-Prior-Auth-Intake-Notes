@@ -73,6 +73,14 @@ Prior Authorization Intake Result
 - Inputs supported: upload, email, fax (synthetic documents only).
 - Explicitly out of scope: EHR integration, payer rules, submission, monitoring.
 
+### 2026-01-01 — Coverage Rules Decision Layer (Agent 3)
+- Defined a standalone, deterministic decision layer for payer + CPT coverage rules.
+- Implemented versioned, schema-validated rules catalogs with explicit support semantics.
+- Added ordered and deduplicated required-document checklists with audit-ready provenance.
+- Normalized payer aliases and CPT inputs with explicit INVALID/MISSING outcomes.
+- Included response timelines, appeal precedence, conditional rule scaffolding, and full CI tests.
+- Explicitly out of scope: EHR integration, document fetching, OCR/NLP, submission logic, UI.
+
 ---
 
 ## Why share this
