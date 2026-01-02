@@ -65,14 +65,6 @@ Prior Authorization Intake Result
 ---
 
 ## Progress Log
-
-### 2025-12-31 — Foundational Intake & Readiness Layer (Agent 1)
-- Defined a clear intake boundary focused on readiness, not automation.
-- Implemented deterministic routing to READY vs NEEDS INFO using a configurable checklist.
-- Added clinic-readable summary output for demo use.
-- Inputs supported: upload, email, fax (synthetic documents only).
-- Explicitly out of scope: EHR integration, payer rules, submission, monitoring.
-
 ### 2026-01-01 — Coverage Rules Decision Layer (Agent 3)
 - Defined a standalone, deterministic decision layer for payer + CPT coverage rules.
 - Implemented versioned, schema-validated rules catalogs with explicit support semantics.
@@ -80,6 +72,13 @@ Prior Authorization Intake Result
 - Normalized payer aliases and CPT inputs with explicit INVALID/MISSING outcomes.
 - Included response timelines, appeal precedence, conditional rule scaffolding, and full CI tests.
 - Explicitly out of scope: EHR integration, document fetching, OCR/NLP, submission logic, UI.
+
+### 2025-12-31 — Foundational Intake & Readiness Layer (Agent 1)
+- Defined a clear intake boundary focused on readiness, not automation.
+- Implemented deterministic routing to READY vs NEEDS INFO using a configurable checklist.
+- Added clinic-readable summary output for demo use.
+- Inputs supported: upload, email, fax (synthetic documents only).
+- Explicitly out of scope: EHR integration, payer rules, submission, monitoring.
 
 ---
 
