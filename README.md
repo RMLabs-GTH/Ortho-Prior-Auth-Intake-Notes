@@ -65,6 +65,11 @@ Prior Authorization Intake Result
 ---
 
 ## Progress Log
+### 2026-01-03 — Agent 2 deterministic fetch & integration
+- Documented the full Agent 2 architecture, deterministic guarantees, and safety/lock rules in `agent2_architecture.md`.
+- Implemented the Agent 2 runner, persistence, and orchestrator hook that reads `agent1_checklist_v1.json`, logs dispatch/completion, and persists bundles/logs/index under `<storage_root>/<case_id>/case_artifacts/`.
+- Added schema locking (`LOCKED.md`), version stamping (`AGENT2_VERSION=0.1.0`), and validation scripts to prove deterministic bundles, invariant adherence, and Agent 1 contract compliance before treating Agent 2 as immutable.
+
 ### 2026-01-01 — Coverage Rules Decision Layer (Agent 3)
 - Defined a standalone, deterministic decision layer for payer + CPT coverage rules.
 - Implemented versioned, schema-validated rules catalogs with explicit support semantics.
@@ -80,13 +85,7 @@ Prior Authorization Intake Result
 - Inputs supported: upload, email, fax (synthetic documents only).
 - Explicitly out of scope: EHR integration, payer rules, submission, monitoring.
 
-### 2026-01-03 — Agent 2 deterministic fetch & integration
-- Documented the full Agent 2 architecture, deterministic guarantees, and safety/lock rules in `agent2_architecture.md`.
-- Implemented the Agent 2 runner, persistence, and orchestrator hook that reads `agent1_checklist_v1.json`, logs dispatch/completion, and persists bundles/logs/index under `<storage_root>/<case_id>/case_artifacts/`.
-- Added schema locking (`LOCKED.md`), version stamping (`AGENT2_VERSION=0.1.0`), and validation scripts to prove deterministic bundles, invariant adherence, and Agent 1 contract compliance before treating Agent 2 as immutable.
-
 ---
 
 ## Why share this
 This repository is a public snapshot of how I’m approaching the intake/readiness bottleneck in orthopaedics, before touching EHRs, payer rules, or submission workflows.
-For details on the Agent 2 fetch architecture, deterministic guarantees, and integration flow, see `agent2_architecture.md`.
