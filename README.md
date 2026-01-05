@@ -65,10 +65,14 @@ Prior Authorization Intake Result
 ---
 
 ## Progress Log
+### 2026-01-04 — Package hygiene & intake imports
+- Simplified the intake helpers and adapters so they rely on the package layout rather than manual path tricks.
+- Double-checked that the modules load cleanly with the new imports and that the core tests still pass.
+
 ### 2026-01-03 — Agent 2 deterministic fetch & integration
-- Documented the full Agent 2 architecture, deterministic guarantees, and safety/lock rules in `architecture.md`.
-- Implemented the Agent 2 runner, persistence, and orchestrator hook that reads `agent1_checklist_v1.json`, logs dispatch/completion, and persists bundles/logs/index under `<storage_root>/<case_id>/case_artifacts/`.
-- Added schema locking (`LOCKED.md`), version stamping (`AGENT2_VERSION=0.1.0`), and validation scripts to prove deterministic bundles, invariant adherence, and Agent 1 contract compliance before treating Agent 2 as immutable.
+- Captured the deterministic Agent 2 architecture, guarantees, and safety/lock rules so its behavior is transparent.
+- Built the runner, persistence layer, and orchestrator handoff that deliver stable bundles tied to each intake checklist run.
+- Locked the schema, stamped the version, and added validation checks so Agent 2 feels trusted and repeatable.
 
 ### 2026-01-01 — Coverage Rules Decision Layer (Agent 3)
 - Defined a standalone, deterministic decision layer for payer + CPT coverage rules.
@@ -89,8 +93,3 @@ Prior Authorization Intake Result
 
 ## Why share this
 This repository is a public snapshot of how I’m approaching the intake/readiness bottleneck in orthopaedics, before touching EHRs, payer rules, or submission workflows.
-
-## Code repository
-
-- Project Ortho Greenlight can also be pushed to `https://github.com/RMLabs-GTH/Project-Ortho-Greenlight.git`.
-- Keep the implementation files (contracts, agents, and templates) aligned with that remote before syncing the broader workspace to avoid drift between repositories.
