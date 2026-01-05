@@ -1,47 +1,26 @@
-# Agent 2: Document Fetch
+# Agent 2: Document Fetch Architecture
 
-## Purpose
-Fetch required clinical artifacts deterministically using validated adapters and return an auditable bundle.
+## Overview
+Agent 2 is the **deterministic evidence-gathering engine** for the Ortho Greenlight workflow. It serves as a reliable bridge between initial patient intake and downstream automation by fetching required clinical artifacts (notes, reports, etc.) from various sources.
 
-## Non-goals
-- No interpretation of medical necessity.
-- No payer submission.
-- No credential management beyond scoped adapter config.
+## Core Principles
+The system is built on three foundational pillars:
+1. **Determinism**: Identical inputs always produce the same retrieval plan and bundle of evidence. 
+2. **Auditability**: Every fetched document is fingerprinted and logged with full provenance data, allowing auditors to trace any artifact back to its specific source.
+3. **Safety**: Agent 2 is strictly **read-only**. It never interprets clinical content (no medical necessity interpretation) and never modifies source data.
 
-## Inputs
-- `FetchRequest` (requested document types, date bounds, patient identifiers, adapter config)
-- Case context (case_id, clinic_id)
+## Process Flow
+The "Document Fetch" lifecycle follows a simple, repeatable path:
+1. **Intake Processing**: Agent 1 creates a checklist of required evidence.
+2. **Orchestration**: When a case is ready, the system dispatches Agent 2 with specific document types and date ranges to fetch.
+3. **Fetch Execution**: Validated adapters (e.g., FHIR, local file systems) retrieve the artifacts. 
+4. **Normalization**: Filenames are standardized, duplicates are removed, and files are hashed (SHA256).
+5. **Bundle Assembly**: A versioned Evidence Bundle and a detailed audit log are generated.
 
-## Outputs
-- `EvidenceBundleV1` when artifacts exist
-- `FetchLogEvent` stream (FETCH_* provenance events)
-- `Agent2Result` with normalized filenames and dedupe semantics
+## Technical Guardrails
+- **Immutable Contracts**: All interfaces are versioned (current: v0.1.0). Any changes to data structures require a version bump and regression testing.
+- **Network Kill Switch**: Outbound network activity is disabled by default and requires explicit configuration and environment-level permission.
+- **Pure Functional Core**: The internal planning logic is decoupled from actual I/O, making it highly testable and predictable.
 
-## Determinism and side effects
-- Deterministic planning, ordering, normalization, and bundle assembly for identical inputs.
-- Side effects: external reads via adapters. No external writes.
-
-## Interfaces and contracts
-- Version constant: `AGENT2_VERSION = "0.1.0"`
-- Contracts: `DocumentType`, `FetchRequest`, `EvidenceBundleV1`, `FetchLogEvent`, `Agent2Result`, `Agent1ChecklistV1` reference
-
-## Core flow
-1. Validate adapters and request.
-2. Plan and normalize fetch operations.
-3. Execute with retry rules for timeouts.
-4. Normalize filenames, dedupe, and persist artifacts.
-5. Emit logs and bundle only if artifacts exist.
-
-## Failure modes and retries
-- Adapter validation failure: explicit error result.
-- Timeouts: retry with capped attempts; log all attempts.
-- Empty results: no bundle emitted, explicit empty result.
-
-## Test strategy
-- Adapter contract tests
-- Deterministic plan hashing tests
-- Golden log/event sequences
-
-## Integration points
-- Upstream: Agent 4 planning or orchestrator requests
-- Downstream: Agent 4 evidence assembly consumes `EvidenceBundleV1`
+## Business Value
+By automating the collection of clinical evidence into a standardized, auditable format, Agent 2 significantly reduces the manual effort required for prior-authorizations while ensuring 100% compliance with data integrity policies.
