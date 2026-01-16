@@ -68,6 +68,7 @@ Prior Authorization Intake Result
 - Integrated these insights into the decision engine to provide real-time risk signaling and recommendations.
 - Launched a patterns dashboard to visualize approval trends, common denial reasons, and document effectiveness.
 - Implemented a "Glass-Box" Reviewer interface (Agent 6) for final medical authorization, allowing clinicians to verify AI findings against original clinical records before submission.
+- Added **NPI Registry Connector** to eliminate denials caused by provider data mismatches, enabling real-time validation against federal databases.
 
 ### 2026-01-04 — Package hygiene & intake imports
 - Simplified the intake helpers and adapters so they rely on the package layout rather than manual path tricks.
