@@ -66,12 +66,9 @@ Prior Authorization Intake Result
 
 ## Progress Log
 ### 2026-01-16 — Dynamic Patterns Layer & Risk Signaling
-- Implemented a "Dynamic Patterns Layer" to capture empirical payer decision signals (approvals, denials, reasons) diverging from published rules.
-- Created the `DecisionOutcomeV1` contract and standardized **Denial Taxonomy** (18 codes across 6 categories) for consistent outcome analysis.
-- Developed the `OutcomeStore` for persistent, file-based tracking and aggregate pattern detection.
-- Integrated dynamic risk signaling into **Agent 3 (Coverage Rules)**, providing real-time approval rates and "soft risk" recommendations.
-- Built a **Premium Patterns Dashboard** (FastAPI/Chart.js) for visualizing approval distributions, denial clusters, and document effectiveness.
-- Added simulation tools to generate realistic demo outcomes for instant visualization of payer behavior patterns.
+- Created a learning layer that tracks actual payer outcomes (approvals and denials) to identify patterns that diverge from published rules.
+- Integrated these insights into the decision engine to provide real-time risk signaling and recommendations.
+- Launched a patterns dashboard to visualize approval trends, common denial reasons, and document effectiveness.
 
 ### 2026-01-04 — Package hygiene & intake imports
 - Simplified the intake helpers and adapters so they rely on the package layout rather than manual path tricks.
