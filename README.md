@@ -31,14 +31,12 @@ This layer is intentionally narrow. It focuses on early clarity, not automation.
 ---
 
 ## What exists today (design scope)
-A foundational intake layer that:
-- ingests documents from common clinic channels (upload, email, fax)
-- normalizes inputs into a canonical case view
-- evaluates a configurable checklist for completeness
-- outputs a clinic-readable summary showing:
-  - readiness state (READY / NEEDS INFO)
-  - missing vs received items
-  - recommended next action
+A clinical readiness and intelligence infrastructure that:
+- **Intake**: ingests documents from common clinic channels (upload, email, fax) and normalizes them into a canonical case view.
+- **Rules**: applies deterministic payer coverage rules to evaluate clinical readiness.
+- **Patterns**: captures actual payer outcomes to identify patterns where real-world behavior diverges from published policies.
+- **Risk Signaling**: provides "soft risk" scores and recommendations based on historical approval trends and common denial reasons.
+- **Visibility**: surfaces all readiness states, missing items, and learned patterns via a unified dashboard.
 
 All behavior is demo-only and uses synthetic documents.
 
